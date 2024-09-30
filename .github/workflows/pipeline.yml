@@ -29,8 +29,9 @@ jobs:
       # Step 4: Terraform Init
       - name: Terraform Init
         run: terraform init
+        working-directory: terraform  # Definir o diretório correto
 
-      # Step 5: Import the existing RDS instance if necessary
+      # Step 5: Import RDS Instance if necessary
       - name: Import RDS Instance
         run: |
           if ! terraform state show aws_db_instance.db > /dev/null 2>&1; then
@@ -38,16 +39,17 @@ jobs:
           else
             echo "RDS instance already imported."
           fi
+        working-directory: terraform  # Definir o diretório correto
 
       # Step 6: Terraform Plan
       - name: Terraform Plan
         run: terraform plan
+        working-directory: terraform  # Definir o diretório correto
 
       # Step 7: Terraform Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        working-directory: terraform  # Definir o diretório correto
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      # Optional: Add any additional steps you need for your application
