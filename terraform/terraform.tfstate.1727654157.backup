@@ -1,0 +1,83 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.6",
+  "serial": 8,
+  "lineage": "566f33a7-ee52-d840-1637-f465d176f696",
+  "outputs": {
+    "db_instance_endpoint": {
+      "value": null,
+      "type": "string"
+    },
+    "db_instance_id": {
+      "value": null,
+      "type": "string"
+    },
+    "db_security_group_id": {
+      "value": "sg-0e79000fc770757a7",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "db_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:778862303728:security-group/sg-0e79000fc770757a7",
+            "description": "Managed by Terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-0e79000fc770757a7",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "10.0.0.0/16"
+                ],
+                "description": "",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "name": "terraform-20240928151414007800000001",
+            "name_prefix": "terraform-",
+            "owner_id": "778862303728",
+            "revoke_rules_on_delete": null,
+            "tags": {
+              "Name": "db-sg"
+            },
+            "tags_all": {
+              "Name": "db-sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-09812cbad2b7762cb"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
