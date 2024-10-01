@@ -4,11 +4,10 @@ provider "aws" {
 
 # Definindo o grupo de segurança
 resource "aws_security_group" "db_sg" {
-  name        = "terraform-20240928151414007800000001"
+  name        = "terraform-20241001005918254900000003"
   description = "Managed by Terraform"
-  vpc_id      = "vpc-09812cbad2b7762cb"
+  vpc_id      = "vpc-0add8518b58c7b20b"
 
-  // Defina suas regras de entrada e saída conforme necessário
   ingress {
     from_port   = 5432
     to_port     = 5432
@@ -24,14 +23,14 @@ resource "aws_security_group" "db_sg" {
   }
 
   tags = {
-    Name = "db-sg"
+    Name = "db-sg-v2"
   }
 }
 
 
 # Alterar instância do RDS
-resource "aws_db_instance" "db" {
-  identifier              = "dbinstance"
+resource "aws_db_instance" "db_v2" {
+  identifier              = "dbinstance-v2"
   engine                  = "postgres"
   engine_version          = "15.7"
   instance_class          = "db.t3.micro"
@@ -40,14 +39,14 @@ resource "aws_db_instance" "db" {
   username                = var.db_username
   password                = var.db_password
   db_name                 = var.db_name
-  vpc_security_group_ids  = [aws_security_group.db_sg.id]
-  db_subnet_group_name    = "my-db-subnet-group"
+  vpc_security_group_ids  = [aws_security_group.db_sg_v2.id]
+  db_subnet_group_name    = aws_db_subnet_group.db_subnet_group_v2.name 
   skip_final_snapshot     = true
   deletion_protection     = true
   publicly_accessible      = false
   apply_immediately       = true
 
    tags = {
-    Name = "dbinstance"
+    Name = "dbinstance-v2"
   }
 }
